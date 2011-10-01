@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file                        
+ * Installation file for piratepad Settings module.
+ */
+
+
+/**
+ * Implementation of hook_install().
+ *
+ * Perform initial setup tasks.
+ */
+function piratepad_install() {
+  drupal_install_schema('piratepad');
+}
+
+
+/**
+ * Implementation of hook_uninstall().
+ *
+ * Perform final clean-up tasks.
+ */
+function piratepad_uninstall() {
+  drupal_uninstall_schema('piratepad');
+}
+
+/**
+ * Implementation of hook_schema().
+ *
+ * Describe the module's data model as an associative array. This removes
+ * the requirement to write database-specific SQL to create tables.
+ *
+ * For full details: http://drupal.org/node/146843
+ */
+function piratepad_schema() {
+	$schema = array();
+	$schema['piratepad'] = array(
+	  'description' => t('TODO: please describe this table!'),
+	  'fields' => array(
+	    'nid' => array(
+	      'description' => t('TODO: please describe this field!'),
+	      'type' => 'int',
+	      'unsigned' => TRUE,
+	      'not null' => TRUE,
+	    ),
+	    'piratepad_id' => array(
+	      'description' => t('TODO: please describe this field!'),
+	      'type' => 'text',
+	      'size' => 'small',
+	      'not null' => TRUE,
+	    ),
+	  ),
+	  'indexes' => array(
+	    'nid' => array('nid'),
+	  ),
+	);
+  return $schema;
+}	

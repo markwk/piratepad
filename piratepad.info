@@ -1,0 +1,7 @@
+name = PiratePad
+description = Add and Embed EtherPad Collaborative Writing Spaces from PiratePad.net
+package = Custom
+version = 6.x
+core = 6.x
+php = 5.1
+

@@ -1,0 +1,90 @@
+<?php
+/**
+ * @file
+ * This module is developed for getting quiz informations from piratepad.com.
+ *
+ * TODOS: 
+ * - Add Option to Create Multiple Instances of Same Vocabulary List IDs
+ */
+
+/**
+* implementation of hook_perm()
+* 
+*/
+function piratepad_perm() {
+  return array('administrator piratepad', 'view editable piratepad', );
+}
+
+/**
+* implementation of hook_menu()
+* 
+*/
+function piratepad_menu() {
+  $items['node/%node/viewpad'] = array(
+    'title' => t('View Read-only Pad'),
+    'description' => t('View Read-Only Pad'),
+    'page callback' => 'piratepad_terms_embeddedcards',
+    'page arguments' => array(1, 2),
+    'access callback' => 'piratepad_flashcards_access',
+    'access arguments' => array(1),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'piratepad.module',
+  );
+$items['node/%node/editpad'] = array(
+  'title' => t('Edit Pad'),
+  'description' => t('Access Editable Pad'),
+  'page callback' => 'piratepad_terms_embeddedcards',
+  'page arguments' => array(1, 2),
+  'access callback' => 'piratepad_flashcards_access',
+  'access arguments' => array(1),
+  'type' => MENU_LOCAL_TASK,
+  'file' => 'piratepad.module',
+);
+  return $items; 
+} 
+
+
+/**
+* Implementation of hook_node_info().
+*/
+function piratepad_node_info() {
+  return array(
+    'piratepad' => array(
+      'name' => t('PiratePad EtherPad'),
+      'module' => 'piratepad',
+      'description' => t("Custom content type for embedding PiratePad EtherPads"),
+      'has_title' => TRUE,
+      'title_label' => t('Title'),
+      'body_label' => t('Description'),
+      'has_body' => TRUE,
+    )
+  );
+}
+/**
+* Implementation of hook_form().
+*/
+function piratepad_form(&$node, $form_state) {
+  $type = node_get_types('type', $node);
+  $form['title'] = array(
+    '#type' => 'textfield',
+    '#title' => check_plain($type->title_label),
+    '#required' => TRUE,
+    '#default_value' => $node->title,
+    '#weight' => -5
+  );
+  $form['body'] = array(
+    '#type' => 'textarea',
+    '#title' => check_plain($type->body_label),
+    '#default_value' => $node->body,
+    '#required' => FALSE
+  );
+  $form['piratepad_id'] = array(
+    '#type' => 'textfield',
+    '#title' => t('piratepad ID'),
+    '#default_value' => $node->piratepad_id,
+    '#required' => TRUE,
+  );
+  return $form;
+}
+
+
