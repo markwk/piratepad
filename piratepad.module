@@ -1,10 +1,8 @@
 <?php
 /**
  * @file
- * This module is developed for getting quiz informations from piratepad.com.
+ * This module is developed for embedding EtherPads from piratepad.com.
  *
- * TODOS: 
- * - Add Option to Create Multiple Instances of Same Vocabulary List IDs
  */
 
 /**
