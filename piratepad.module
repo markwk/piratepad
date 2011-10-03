@@ -87,7 +87,7 @@ function piratepad_form(&$node, $form_state) {
     '#type' => 'textfield',
     '#title' => t('Piratepad ID'),
     '#default_value' => $node->piratepad_id,
-    '#description' => t('Create Your Etherpad at @link and copy the etherpadID. For example, ABCDEDF from piratepad.net/ABCDEFG.', array('@link' => 'http://piratepad.net/ep/pad/newpad')),
+ 	'#description' => t('Create Your Etherpad at <a href="@link" target="_blank">http://piratepad.net/ep/pad/newpad</a> and copy the etherpadID. For example, ABCDEDF from piratepad.net/ABCDEFG.', array('@link' => url('http://piratepad.net/ep/pad/newpad', array('absolute' => TRUE)))),
     '#required' => TRUE,
   );
   $form['piratepad_link'] = array(
