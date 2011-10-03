@@ -10,7 +10,7 @@
 * 
 */
 function piratepad_perm() {
-  return array('administrator piratepad', 'view editable piratepad', 'view piratepad');
+  return array('administrator piratepad', 'view editable piratepad', 'view piratepad', 'create piratepad', 'delete own piratepad', 'delete any piratepad', 'edit any piratepad', 'edit own piratepad');
 }
 
 /**
@@ -40,6 +40,20 @@ function piratepad_menu() {
   return $items; 
 } 
 /**
+ * Implementation of hook_access().
+ */
+function piratepad_access($op, $node, $account) {
+  switch ($op) {
+    case 'create':
+      return user_access('create piratepad', $account) ? TRUE : NULL;
+    case 'update':
+      return user_access('edit any piratepad', $account) || (user_access('edit own piratepad', $account) && ($node->uid == $account->uid)) ? TRUE : NULL;
+    case 'delete':
+      return user_access('delete any piratepad', $account) || (user_access('delete own piratepa', $account) && ($node->uid == $account->uid)) ? TRUE : NULL;
+  }
+}
+
+/**
 * Access to readonly piratepad
 * @param mixed $node
 */
@@ -65,7 +79,7 @@ function piratepad_node_info() {
       'has_title' => TRUE,
       'title_label' => t('Title'),
       'body_label' => t('Description'),
-      'has_body' => FALSE,
+      'has_body' => TRUE,
     )
   );
 }
@@ -80,6 +94,12 @@ function piratepad_form(&$node, $form_state) {
     '#required' => TRUE,
     '#default_value' => $node->title,
     '#weight' => -5
+  );
+  $form['body'] = array(
+    '#type' => 'textarea',
+    '#title' => check_plain($type->body_label),
+    '#default_value' => $node->body,
+    '#required' => FALSE
   );
   $form['piratepad_id'] = array(
     '#type' => 'textfield',
