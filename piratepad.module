@@ -59,7 +59,7 @@ function piratepad_access($op, $node, $account) {
 */
 function piratepad_viewpad_access($node) {
   // if (!empty($node->piratepad_link) && user_access('view piratepad'))  {
-  if (user_access('view piratepad'))  {	
+  if (user_access('view piratepad') && $node->type == 'piratepad')  {	
     return TRUE; 
   } 
   else {
