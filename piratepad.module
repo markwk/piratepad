@@ -164,9 +164,11 @@ function priatepad_viewdata($node) {
   $piratepad_id = $node->piratepad_id; 
   $width = variable_get('piratepad_width', 900);
   $height = variable_get('piratepad_height', 600);
+/*
   $url =  'http://piratepad.net/OuQxM4X4mU?showControls=true&showChat=true&showLineNumbers=true&useMonospaceFont=false';
   $url_id = 'http://piratepad.net/OuQxM4X4mU';
-  return theme_render_template(drupal_get_path('module', 'piratepad') . '/templates/embedded_piratepad.tpl.php', array('url' => $url, 'height' => $height, 'width' => $width, 'url_id' => $url_id)); 
+*/
+  return theme_render_template(drupal_get_path('module', 'piratepad') . '/templates/embedded_piratepad.tpl.php', array('url' => $piratepad_id, 'height' => $height, 'width' => $width, 'url_id' => $url_id)); 
 }
 /**
 * View editable piratepad
